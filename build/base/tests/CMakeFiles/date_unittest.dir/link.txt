@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -Wall -std=c++11 CMakeFiles/date_unittest.dir/Date_unittest.cpp.o -o ../../bin/date_unittest  ../libbase.a -lpthread -lrt 
