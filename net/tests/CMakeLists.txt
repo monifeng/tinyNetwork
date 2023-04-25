@@ -1,0 +1,39 @@
+add_executable(channel_test Channel_test.cpp)
+target_link_libraries(channel_test net)
+
+add_executable(echoserver_unittest EchoServer_unittest.cpp)
+target_link_libraries(echoserver_unittest net)
+
+add_executable(echoclient_unittest EchoClient_unittest.cpp)
+target_link_libraries(echoclient_unittest net)
+
+add_executable(eventloop_unittest EventLoop_unittest.cpp)
+target_link_libraries(eventloop_unittest net)
+
+add_executable(eventloopthread_unittest EventLoopThread_unittest.cpp)
+target_link_libraries(eventloopthread_unittest net)
+
+add_executable(eventloopthreadpool_unittest EventLoopThreadPool_unittest.cpp)
+target_link_libraries(eventloopthreadpool_unittest net)
+
+add_executable(buffer_unittest Buffer_unittest.cpp)
+target_link_libraries(buffer_unittest net boost_unit_test_framework)
+add_test(NAME buffer_unittest COMMAND buffer_unittest)
+
+add_executable(inetaddress_unittest InetAddress_unittest.cpp)
+target_link_libraries(inetaddress_unittest net boost_unit_test_framework)
+add_test(NAME inetaddress_unittest COMMAND inetaddress_unittest)
+
+add_executable(tcpclient_reg1 TcpClient_reg1.cpp)
+target_link_libraries(tcpclient_reg1 net)
+
+add_executable(tcpclient_reg2 TcpClient_reg2.cpp)
+target_link_libraries(tcpclient_reg2 net)
+
+add_executable(tcpclient_reg3 TcpClient_reg3.cpp)
+target_link_libraries(tcpclient_reg3 net)
+
+add_executable(timerqueue_unittest TimerQueue_unittest.cpp)
+target_link_libraries(timerqueue_unittest net)
+add_test(NAME timerqueue_unittest COMMAND timerqueue_unittest)
+
