@@ -46,6 +46,7 @@ Timestamp EPollPoller::poll(int timeoutMs, ChannelList* activeChannels)
 {
     LOG_TRACE << "fd total count " << channels_.size();
 
+    // epoll_wait返回需要处理的事件数目
     int numEvents = ::epoll_wait(epollfd_,
                                 &*events_.begin(),
                                 static_cast<int>(events_.size()),
@@ -87,6 +88,7 @@ void EPollPoller::fillActiveChannels(int numEvents,
         assert(it->second == channel);
         #endif
 
+        // 填充触发事件，并将该channel列为活跃的channel
         channel->set_revents(events_[i].events);
         activeChannels->push_back(channel);
     }

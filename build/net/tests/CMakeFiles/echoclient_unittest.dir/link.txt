@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -Wall -std=c++11 CMakeFiles/echoclient_unittest.dir/EchoClient_unittest.cpp.o -o ../../bin/echoclient_unittest  ../libnet.a ../../base/libbase.a -lpthread -lrt 

@@ -79,7 +79,6 @@ EventLoop::EventLoop()
   }
   wakeupChannel_->setReadCallback(
       std::bind(&EventLoop::handleRead, this));
-  // we are always reading the wakeupfd
   wakeupChannel_->enableReading();
 }
 
@@ -103,8 +102,8 @@ void EventLoop::loop()
 
   while (!quit_)
   {
-    activeChannels_.clear();
-    pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_);
+    activeChannels_.clear();  // 清理遗留，因为逻辑上来说每个Channel都是执行过的
+    pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_); // 调用poll获取所有可读可写的文件描述符
     ++iteration_;
     if (Logger::logLevel() <= Logger::TRACE)
     {
@@ -112,7 +111,8 @@ void EventLoop::loop()
     }
     // TODO sort channel by priority
     eventHandling_ = true;
-    for (Channel* channel : activeChannels_)
+    // 对所有发生事件的文件描述符进行处理
+    for (Channel* channel : activeChannels_)  
     {
       currentActiveChannel_ = channel;
       currentActiveChannel_->handleEvent(pollReturnTime_);

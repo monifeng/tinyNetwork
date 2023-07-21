@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -Wall -std=c++11 CMakeFiles/logstream_bench.dir/LogStream_bench.cpp.o -o ../../bin/logstream_bench  ../libbase.a -lpthread -lrt 
