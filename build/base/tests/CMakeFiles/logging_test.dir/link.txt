@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -Wall -std=c++11 CMakeFiles/logging_test.dir/Logging_test.cpp.o -o ../../bin/logging_test  ../libbase.a -lpthread -lrt 

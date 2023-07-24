@@ -23,6 +23,7 @@ public:
     explicit TimerQueue(EventLoop* loop);
     ~TimerQueue();
     
+    // 添加定时器事件
     TimerId addTimer(TimerCallback cb,
                     Timestamp when,
                     double interval);
