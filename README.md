@@ -30,9 +30,16 @@ WSL（windows自带ubuntu）
 ./build/bin/httpserver_test
 ```
 
+出现如下信息提示则可以在浏览器中打开该网址了（类似于java的Tomcat）。
+
 ![image-20230425184922855](https://gitee.com/moni_world/pic_bed/raw/master/img/image-20230425184922855.png)
 
-出现如下信息提示则可以在浏览器中打开该网址了（类似于java的Tomcat）。
+
+```bash
+http://localhost:8000/
+```
+
+![image](https://github.com/monifeng/tinyNetwork/assets/70735887/d5f98a68-ea7b-4a52-afff-96e714eb0232)
 
 
 
