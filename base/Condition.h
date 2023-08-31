@@ -3,7 +3,7 @@
 
 #include "Mutex.h"
 #include <condition_variable>
-#include <boost/noncopyable.hpp>
+#include "noncopyable.h"
 
 namespace tnet
 {

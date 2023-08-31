@@ -43,6 +43,7 @@ void HttpServer::start()
 {
   LOG_WARN << "HttpServer[" << server_.name()
     << "] starts listening on " << server_.ipPort();
+    LOG_WARN << "please to your browser to input: localhost:8000";
   server_.start();
 }
 

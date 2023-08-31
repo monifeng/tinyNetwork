@@ -149,7 +149,7 @@ class EventLoop : noncopyable
   Channel* currentActiveChannel_;
 
   mutable MutexLock mutex_;
-  std::vector<Functor> pendingFunctors_ GUARDED_BY(mutex_);
+  std::vector<Functor> pendingFunctors_ GUARDED_BY(mutex_); // GUARDED_BY是安全注解,告诉编译器这个变量必须用mutex保护，否则会警告。
 };
 
 }  // namespace net

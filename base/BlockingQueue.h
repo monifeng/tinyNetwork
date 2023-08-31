@@ -80,4 +80,4 @@ class BlockingQueue : noncopyable
 
 }  // namespace tnet
 
-#endif  _BLOCKINGQUEUE_H_
+#endif

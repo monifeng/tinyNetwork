@@ -153,8 +153,8 @@ void EventLoop::runInLoop(Functor cb)
 void EventLoop::queueInLoop(Functor cb)
 {
   {
-  MutexLockGuard lock(mutex_);
-  pendingFunctors_.push_back(std::move(cb));
+    MutexLockGuard lock(mutex_);
+    pendingFunctors_.push_back(std::move(cb));
   }
 
   if (!isInLoopThread() || callingPendingFunctors_)
@@ -249,9 +249,10 @@ void EventLoop::doPendingFunctors()
   std::vector<Functor> functors;
   callingPendingFunctors_ = true;
 
+  // 减小临界区
   {
-  MutexLockGuard lock(mutex_);
-  functors.swap(pendingFunctors_);
+    MutexLockGuard lock(mutex_);
+    functors.swap(pendingFunctors_);
   }
 
   for (const Functor& functor : functors)

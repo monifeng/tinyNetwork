@@ -42,7 +42,7 @@ private:
     const double interval_;
     const bool repeat_;
     const int64_t sequence_;
-
+ 
     static AtomicInt64 s_numCreated_;
 };
 
