@@ -10,7 +10,7 @@
 
 WSL（windows自带ubuntu）
 
-需要下载Cmake，g++， make，boost库
+需要下载Cmake，g++， make，~~boost库~~完全移除boost库依赖，原因是服务器上配置环境确实恶心。
 
 
 
