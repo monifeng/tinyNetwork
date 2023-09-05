@@ -5,8 +5,8 @@
 //
 // This is a public header file, it must only include public header files.
 
-#ifndef MUDUO_BASE_PROCESSINFO_H
-#define MUDUO_BASE_PROCESSINFO_H
+#ifndef _BASE_PROCESSINFO_H_
+#define _BASE_PROCESSINFO_H_
 
 #include "StringPiece.h"
 #include "Types.h"
@@ -65,4 +65,4 @@ namespace ProcessInfo
 
 }  // namespace tnet
 
-#endif  // MUDUO_BASE_PROCESSINFO_H
+#endif  // _BASE_PROCESSINFO_H

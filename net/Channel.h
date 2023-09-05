@@ -1,5 +1,5 @@
-#ifndef _MUDUO_NET_CHANNEL_H_
-#define _MUDUO_NET_CHANNEL_H_
+#ifndef _NET_CHANNEL_H_
+#define _NET_CHANNEL_H_
 
 #include "../base/noncopyable.h"
 #include "../base/Timestamp.h"

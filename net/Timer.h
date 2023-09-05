@@ -1,5 +1,5 @@
-#ifndef _MUDUO_NET_TIMER_H_
-#define _MUDUO_NET_TIMER_H_
+#ifndef _NET_TIMER_H_
+#define _NET_TIMER_H_
 
 #include "../base/Atomic.h"
 #include "../base/Timestamp.h"

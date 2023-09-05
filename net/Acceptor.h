@@ -1,5 +1,5 @@
-#ifndef _MUDUO_NET_ACCEPTOR_H_
-#define _MUDUO_NET_ACCEPTOR_H_
+#ifndef _NET_ACCEPTOR_H_
+#define _NET_ACCEPTOR_H_
 
 #include <functional>
 #include "Channel.h"
@@ -47,4 +47,4 @@ private:
 } // namespace tnet
 
 
-#endif // _MUDUO_NET_ACCEPTOR_H_
+#endif // _NET_ACCEPTOR_H_
