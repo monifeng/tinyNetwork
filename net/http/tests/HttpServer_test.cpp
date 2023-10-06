@@ -4,14 +4,26 @@
 #include "../../../net/EventLoop.h"
 #include "../../../base/Logging.h"
 
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <sys/sendfile.h>
+#include <unistd.h>
+
 #include <iostream>
+#include <fstream>
 #include <map>
+#include <cstdio>
 
 using namespace tnet;
 using namespace tnet::net;
 
 extern char favicon[555];
 bool benchmark = false;
+
+void getFileListPage(std::string &fileListHtml);
+void getFileVec(const std::string dirName, std::vector<std::string> &resVec);
 
 void onRequest(const HttpRequest& req, HttpResponse* resp)
 {
@@ -52,11 +64,81 @@ void onRequest(const HttpRequest& req, HttpResponse* resp)
         resp->addHeader("Server", "tnet");
         resp->setBody("hello, world!");
     }
+    else if (req.path() == "/file")
+    {
+        resp->setStatusCode(HttpResponse::k200Ok);
+        resp->setStatusMessage("OK");
+        resp->setContentType("text/html");
+        resp->addHeader("Server", "tnet");
+        std::string msg_body;
+        getFileListPage(msg_body);
+        resp->setBody(msg_body);
+    }
+
     else 
     {
         resp->setStatusCode(HttpResponse::k404NotFound);
         resp->setStatusMessage("Not Found");
         resp->setCloseConnection(true);
+    }
+}
+
+void getFileListPage(std::string &fileListHtml){
+    // 结果保存到 fileListHtml
+
+    // 将指定目录内的所有文件保存到 fileVec 中
+    std::vector<std::string> fileVec;
+    getFileVec("net/http/tests/filedir", fileVec);
+    
+    // 构建页面
+    // 不知道为什么只能使用绝对路径
+    std::ifstream fileListStream("net/http/tests/filelist.html", std::ios::in);
+    std::string tempLine;
+    // 首先读取文件列表的 <!--filelist_label--> 注释前的语句
+    LOG_INFO << "begin read filelist.html";
+    
+    while(1){
+        getline(fileListStream, tempLine);
+        if(tempLine == "<!--filelist_label-->"){
+            break;
+        }
+        fileListHtml += tempLine + "\n";
+    }
+
+    // 根据如下标签，将将文件夹中的所有文件项添加到返回页面中
+    //             <tr><td class="col1">filenamename</td> <td class="col2"><a href="file/filename">下载</a></td> <td class="col3"><a href="delete/filename">删除</a></td></tr>
+    for(const auto &filename : fileVec){
+        fileListHtml += "            <tr><td class=\"col1\">" + filename +
+                    "</td> <td class=\"col2\"><a href=\"download/" + filename +
+                    "\">下载</a></td> <td class=\"col3\"><a href=\"delete/" + filename +
+                    "\" onclick=\"return confirmDelete();\">删除</a></td></tr>" + "\n";
+    }
+
+    // 将文件列表注释后的语句加入后面
+    while(getline(fileListStream, tempLine)){
+        fileListHtml += tempLine + "\n";
+    }
+
+}
+
+void getFileVec(const std::string dirName, std::vector<std::string> &resVec){
+    // 使用 dirent 获取文件目录下的所有文件
+    DIR *dir;   // 目录指针
+    dir = opendir(dirName.c_str());
+    LOG_INFO << "begin getFileVec: " << dirName;
+    struct dirent *stdinfo;
+    while (1)
+    {
+        // 获取文件夹中的一个文件
+        stdinfo = readdir(dir);
+
+        if (stdinfo == nullptr){
+            break;
+        }
+        resVec.push_back(stdinfo->d_name);
+        if(resVec.back() == "." || resVec.back() == ".."){
+            resVec.pop_back();
+        }
     }
 }
 
